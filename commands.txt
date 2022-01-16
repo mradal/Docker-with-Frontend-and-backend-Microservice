@@ -1,0 +1,29 @@
+for building image of databasemicroservice
+-->	docker build . -f backend.df -t backend:b1
+create a container using that image 
+-->	docker run -d --name db1 -e MYSQL_ROOT_PASSWORD=123 -p 3309:3306 backend:b1
+Now go inside that container
+---> docker exec -it db1 bash
+
+mysql -u root -p $priar
+show databases;
+use priar;
+show tables;
+select * from priarworld;
+
+enter the following commands here to reset mysql password;
+alter user 'root'@'localhost' identified with mysql_native_password by '123';
+alter user 'root'@'%' identified with mysql_native_password by '123';
+
+exit form db
+exit from container
+
+build another image for frontend microservice
+-->	docker build . -f frontend.df -t frontend:f1
+-->	docker run -d --name mradal -v /data:/var/www/html -p 8088:80 frt:y1
+--> 	docker exec -it db1 bash
+
+now goto web browser enter the public ip of your instance:8088
+Done!!!
+
+
